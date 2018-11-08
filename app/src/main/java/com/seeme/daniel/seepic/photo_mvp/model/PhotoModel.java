@@ -1,4 +1,4 @@
-package com.seeme.daniel.seepic.mvp_Photo.model;
+package com.seeme.daniel.seepic.photo_mvp.model;
 
 import com.seeme.daniel.seepic.base.Model;
 import com.seeme.daniel.seepic.entity.PhotoBean;

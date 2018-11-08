@@ -2,7 +2,6 @@ package com.seeme.daniel.seepic.network;
 
 
 import com.seeme.daniel.seepic.entity.PhotoBean;
-import com.seeme.daniel.seepic.mvp_Photo.model.PhotoModel;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -10,7 +9,7 @@ import retrofit2.http.Query;
 
 
 /**
- * Created by QZS
+ * 获取图片
  */
 
 public interface PhotoApi {

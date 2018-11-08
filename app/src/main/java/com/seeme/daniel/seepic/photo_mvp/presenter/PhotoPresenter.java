@@ -1,12 +1,9 @@
-package com.seeme.daniel.seepic.mvp_Photo.presenter;
+package com.seeme.daniel.seepic.photo_mvp.presenter;
 
-import com.google.gson.Gson;
 import com.seeme.daniel.seepic.base.BasePresenter;
 import com.seeme.daniel.seepic.entity.PhotoBean;
-import com.seeme.daniel.seepic.mvp_Photo.model.PhotoModel;
-import com.seeme.daniel.seepic.mvp_Photo.view.PhotoMyView;
-
-import java.util.List;
+import com.seeme.daniel.seepic.photo_mvp.model.PhotoModel;
+import com.seeme.daniel.seepic.photo_mvp.view.PhotoMyView;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;

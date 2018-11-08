@@ -8,4 +8,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="MainActivity" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@android:color/holo_red_dark</item>
+        <item name="colorPrimaryDark">@android:color/holo_red_dark</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/holo_red_dark</item>
+    </style>
+    <style name="AppTheme.NoBar">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
 </resources>

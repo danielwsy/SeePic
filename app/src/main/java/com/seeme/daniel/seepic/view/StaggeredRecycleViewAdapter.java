@@ -70,7 +70,6 @@ public class StaggeredRecycleViewAdapter extends RecyclerView.Adapter<StaggeredR
         holder.itemView.setTag(position);
         Glide.with(mContext)
                 .load(photolist.get(position).getImage_url())
-                .placeholder(R.mipmap.girls)
                 .into(holder.iv_photo);
 
         holder.iv_photo.setOnClickListener(new View.OnClickListener() {

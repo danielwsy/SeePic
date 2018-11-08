@@ -1,26 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    tools:context="com.seeme.daniel.seepic.MainActivity">
 
-    <android.support.v7.widget.Toolbar
+    <include
         android:id="@+id/toolbar"
+        layout="@layout/include_toolbar" />
+
+    <FrameLayout
+        android:id="@+id/contentContainer"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:layout_scrollFlags="scroll|enterAlways"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:titleTextColor="#ffffff">
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:layout_above="@+id/rg_bottoms"
+        android:layout_below="@+id/toolbar" />
 
-    </android.support.v7.widget.Toolbar>
-
-    <com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView
-        android:id="@+id/pullLoadMoreRecyclerView"
+    <RadioGroup
+        android:id="@+id/rg_bottoms"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="horizontal">
 
-    </com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView>
+        <RadioButton
+            android:id="@+id/rb_news"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/home"
+            android:gravity="center"
+            android:text="新闻"
+            android:textColor="@drawable/text_color" />
 
-</LinearLayout>
+        <RadioButton
+            android:id="@+id/rb_videos"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/video"
+            android:gravity="center"
+            android:text="视频"
+            android:textColor="@drawable/text_color" />
+
+        <RadioButton
+            android:id="@+id/rb_gilrs"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/girls"
+            android:gravity="center"
+            android:text="图片"
+            android:textColor="@drawable/text_color" />
+
+        <RadioButton
+            android:id="@+id/rb_music"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/music"
+            android:gravity="center"
+            android:text="音乐"
+            android:textColor="@drawable/text_color" />
+
+    </RadioGroup>
+</RelativeLayout>

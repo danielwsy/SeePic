@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <com.flyco.tablayout.SlidingTabLayout xmlns:tl="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/SlidingTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/iv_edit"
+            android:background="@color/top"
+            tl:tl_indicator_color="@color/white"
+            tl:tl_textSelectColor="@color/white"
+            tl:tl_textsize="14sp" />
+
+        <ImageButton
+            android:id="@id/iv_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@color/white"
+            android:padding="8dp"
+            android:visibility="gone"
+            android:src="@drawable/ic_news_add" />
+    </RelativeLayout>
+
+    <com.seeme.daniel.seepic.view.CustomViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white" />
+
+</LinearLayout>

@@ -4,6 +4,12 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * @author danielwang
@@ -12,9 +18,11 @@ import android.support.v7.app.AppCompatActivity;
  * @date 2018/11/7 16:15
  */
 public abstract class BaseMvpActivity<M extends Model, V extends MyView, P extends BasePresenter>
-        extends AppCompatActivity implements BaseMvp<M, V, P> {
+        extends SupportActivity implements BaseMvp<M, V, P>, IBase {
 
+    protected View mRootView;
     protected P presenter;
+    Unbinder unbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +35,18 @@ public abstract class BaseMvpActivity<M extends Model, V extends MyView, P exten
             //将View层注册到Presenter中
             presenter.registerView(createView());
         }
+
+        mRootView = createView(null, null, savedInstanceState);
+        setContentView(mRootView);
+        initView(mRootView, savedInstanceState);
+        initData();
+    }
+
+    @Override
+    public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = getLayoutInflater().inflate(getContentView(), container);
+        unbinder = ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
@@ -36,5 +56,6 @@ public abstract class BaseMvpActivity<M extends Model, V extends MyView, P exten
             //Activity销毁时的调用，让具体实现BasePresenter中onViewDestroy()方法做出决定
             presenter.destroy();
         }
+        unbinder.unbind();
     }
 }

@@ -1,17 +1,27 @@
 package com.seeme.daniel.seepic.base;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * @author danielwang
  * @Description: Fragment基类，具体作用和BaseMvpActivity相同
  * @date 2018/11/7 16:18
  */
-public abstract class BaseMvpFragment<M extends Model, V extends MyView, P extends BasePresenter> extends Fragment implements BaseMvp<M, V, P> {
+public abstract class BaseMvpFragment<M extends Model, V extends MyView, P extends BasePresenter> extends SupportFragment implements BaseMvp<M, V, P>, IBase {
 
     protected P presenter;
-
+    protected Context mContext;
+    protected View mRootView = null;
+    Unbinder unbinder;
 
     @Override
     public void onAttach(Context context) {
@@ -23,11 +33,48 @@ public abstract class BaseMvpFragment<M extends Model, V extends MyView, P exten
         }
     }
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (mRootView != null) {
+            ViewGroup parent = (ViewGroup) mRootView.getParent();
+            if (parent != null) {
+                parent.removeView(mRootView);
+            }
+        } else {
+            mRootView = createView(inflater, container, savedInstanceState);
+        }
+
+        mContext = mRootView.getContext();
+        return mRootView;
+    }
+
+
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+        initData();
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initView(view, savedInstanceState);
+    }
+
+    @Override
+    public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(getContentView(), container, false);
+        unbinder = ButterKnife.bind(this, view);
+        return view;
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         if (presenter != null) {
             presenter.destroy();
         }
+        unbinder.unbind();
     }
 }
