@@ -1,5 +1,7 @@
 package com.seeme.daniel.seepic.mvp_news.entity;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -96,7 +98,7 @@ public class NewsDetail implements Serializable {
         this.item = item;
     }
 
-    public static class ItemBean implements Serializable {
+    public static class ItemBean implements Serializable, MultiItemEntity {
         //广告类型
         public static final int TYPE_ADVERT_TITLEIMG = 1;
 
