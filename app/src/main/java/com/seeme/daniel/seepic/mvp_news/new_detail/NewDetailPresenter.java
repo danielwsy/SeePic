@@ -2,14 +2,10 @@ package com.seeme.daniel.seepic.mvp_news.new_detail;
 
 import android.util.Log;
 
-import com.airbnb.lottie.L;
 import com.seeme.daniel.seepic.base.BasePresenter;
-import com.seeme.daniel.seepic.entity.PhotoBean;
-import com.seeme.daniel.seepic.mvp_news.entity.NewsDetail;
-import com.seeme.daniel.seepic.network.NewsApi;
+import com.seeme.daniel.seepic.entity.NewsDetail;
 import com.seeme.daniel.seepic.network.RxSchedulers;
 import com.seeme.daniel.seepic.network.UrlConfig;
-import com.seeme.daniel.seepic.utils.LogUtils;
 import com.seeme.daniel.seepic.utils.NewsTypeUtils;
 
 import java.util.Iterator;
@@ -17,10 +13,8 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * @author danielwang
@@ -44,9 +38,6 @@ public class NewDetailPresenter extends BasePresenter<NewsDetailModel, NewDetail
                                 if (NewsTypeUtils.isBannerNews(newsDetail)) {
                                     getView().loadBannerData(newsDetail);
                                 }
-                                if (NewsTypeUtils.isTopNews(newsDetail)) {
-                                    getView().loadTopNewsData(newsDetail);
-                                }
                             }
                             return newsDetails.get(0);
                         }
@@ -55,29 +46,51 @@ public class NewDetailPresenter extends BasePresenter<NewsDetailModel, NewDetail
                         @Override
                         public List<NewsDetail.ItemBean> apply(NewsDetail newsDetail) throws Exception {
                             Iterator<NewsDetail.ItemBean> iterator = newsDetail.getItem().iterator();
-                            try {
-                                while (iterator.hasNext()) {
+                            while (iterator.hasNext()) {
+                                try {
                                     NewsDetail.ItemBean bean = iterator.next();
-                                    String type = bean.getType();
-                                    if (NewsTypeUtils.TYPE_DOC.equals(type)) {
-                                        setType_DOC(bean);
-                                    } else if (NewsTypeUtils.TYPE_ADVERT.equals(type)) {
-                                        setType_ADVERT(bean);
-
-                                    } else if (NewsTypeUtils.TYPE_SLIDE.equals(type)) {
-                                        setType_SLIDE(bean);
-                                    } else if (NewsTypeUtils.TYPE_PHVIDEO.equals(type)) {
-                                        setType_PHVIDEO(bean);
+                                    if (bean.getType().equals(NewsTypeUtils.TYPE_DOC)) {
+                                        if (bean.getStyle().getView() != null) {
+                                            if (bean.getStyle().getView().equals(NewsTypeUtils.VIEW_TITLEIMG)) {
+                                                bean.itemType = NewsDetail.ItemBean.TYPE_DOC_TITLEIMG;
+                                            } else {
+                                                bean.itemType = NewsDetail.ItemBean.TYPE_DOC_SLIDEIMG;
+                                            }
+                                        }
+                                    } else if (bean.getType().equals(NewsTypeUtils.TYPE_ADVERT)) {
+                                        if (bean.getStyle() != null) {
+                                            if (bean.getStyle().getView().equals(NewsTypeUtils.VIEW_TITLEIMG)) {
+                                                bean.itemType = NewsDetail.ItemBean.TYPE_ADVERT_TITLEIMG;
+                                            } else if (bean.getStyle().getView().equals(NewsTypeUtils.VIEW_SLIDEIMG)) {
+                                                bean.itemType = NewsDetail.ItemBean.TYPE_ADVERT_SLIDEIMG;
+                                            } else {
+                                                bean.itemType = NewsDetail.ItemBean.TYPE_ADVERT_LONGIMG;
+                                            }
+                                        } else {
+                                            iterator.remove();
+                                        }
+                                    } else if (bean.getType().equals(NewsTypeUtils.TYPE_SLIDE)) {
+                                        if (bean.getLink().getType().equals(NewsTypeUtils.TYPE_DOC)) {
+                                            if (bean.getStyle().getView().equals(NewsTypeUtils.VIEW_SLIDEIMG)) {
+                                                bean.itemType = NewsDetail.ItemBean.TYPE_DOC_SLIDEIMG;
+                                            } else {
+                                                bean.itemType = NewsDetail.ItemBean.TYPE_DOC_TITLEIMG;
+                                            }
+                                        } else {
+                                            bean.itemType = NewsDetail.ItemBean.TYPE_SLIDE;
+                                        }
+                                    } else if (bean.getType().equals(NewsTypeUtils.TYPE_PHVIDEO)) {
+                                        bean.itemType = NewsDetail.ItemBean.TYPE_PHVIDEO;
                                     } else {
+                                        // TODO: 2018/11/9 类型太多了，将其他的类型干掉
                                         iterator.remove();
                                     }
+                                } catch (Exception e) {
+                                    iterator.remove();
+                                    e.printStackTrace();
                                 }
-                            } catch (Exception e) {
-                                iterator.remove();
                             }
-
-
-                            return null;
+                            return newsDetail.getItem();
                         }
                     })
                     .subscribe(new Observer<List<NewsDetail.ItemBean>>() {
@@ -88,11 +101,10 @@ public class NewDetailPresenter extends BasePresenter<NewsDetailModel, NewDetail
 
                         @Override
                         public void onNext(List<NewsDetail.ItemBean> itemBeans) {
-
                             if (!action.equals(UrlConfig.ACTION_UP)) {
-                                getView().loadData(itemBeans);
+                                getView().xPullMoreData(itemBeans);
                             } else {
-                                getView().loadMoreData(itemBeans);
+                                getView().sPushMoreData(itemBeans);
                             }
 
                         }
@@ -102,9 +114,11 @@ public class NewDetailPresenter extends BasePresenter<NewsDetailModel, NewDetail
 
                             Log.i(TAG, "onFail: " + e.getMessage().toString());
                             if (!action.equals(UrlConfig.ACTION_UP)) {
-                                getView().loadData(null);
+                                if (getView() == null) return;
+                                getView().xPullMoreData(null);
                             } else {
-                                getView().loadMoreData(null);
+                                if (getView() == null) return;
+                                getView().sPushMoreData(null);
                             }
                         }
 
@@ -114,78 +128,8 @@ public class NewDetailPresenter extends BasePresenter<NewsDetailModel, NewDetail
                         }
                     });
 
-//
-//            observable.observeOn(AndroidSchedulers.mainThread())
-//                    .subscribeOn(Schedulers.io())
-//                    .subscribe(new Observer<List<NewsDetail>>() {
-//                        @Override
-//                        public void onSubscribe(Disposable d) {
-//                            LogUtils.showLogs(TAG, "onSubscribe");
-//                        }
-//
-//                        @Override
-//                        public void onNext(List<NewsDetail> newsDetails) {
-//                            if (newsDetails != null) {
-//
-//                            }
-//                            LogUtils.showLogs(TAG, "onNext");
-//
-//                        }
-//
-//                        @Override
-//                        public void onError(Throwable e) {
-//                            LogUtils.showLogs(TAG, "onError");
-//
-//
-//                        }
-//
-//                        @Override
-//                        public void onComplete() {
-//                            LogUtils.showLogs(TAG, "onComplete");
-//
-//                        }
-//                    });
         }
     }
-
-    private void setType_PHVIDEO(NewsDetail.ItemBean bean) {
-        bean.itemType = NewsDetail.ItemBean.TYPE_PHVIDEO;
-    }
-
-    private void setType_SLIDE(NewsDetail.ItemBean bean) {
-        if (bean.getLink().getType().equals("doc")) {
-            if (bean.getStyle().getView().equals(NewsTypeUtils.VIEW_SLIDEIMG)) {
-                bean.itemType = NewsDetail.ItemBean.TYPE_DOC_SLIDEIMG;
-            } else {
-                bean.itemType = NewsDetail.ItemBean.TYPE_DOC_TITLEIMG;
-            }
-        } else {
-            bean.itemType = NewsDetail.ItemBean.TYPE_SLIDE;
-        }
-    }
-
-    private void setType_ADVERT(NewsDetail.ItemBean bean) {
-        if (bean.getStyle() != null) {
-            if (bean.getStyle().getView().equals(NewsTypeUtils.VIEW_TITLEIMG)) {
-                bean.itemType = NewsDetail.ItemBean.TYPE_ADVERT_TITLEIMG;
-            } else if (bean.getStyle().getView().equals(NewsTypeUtils.VIEW_SLIDEIMG)) {
-                bean.itemType = NewsDetail.ItemBean.TYPE_ADVERT_SLIDEIMG;
-            } else {
-                bean.itemType = NewsDetail.ItemBean.TYPE_ADVERT_LONGIMG;
-            }
-        }
-    }
-
-    private void setType_DOC(NewsDetail.ItemBean bean) {
-        if (bean.getStyle().getView() != null) {
-            if (bean.getStyle().getView().equals(NewsTypeUtils.VIEW_TITLEIMG)) {
-                bean.itemType = NewsDetail.ItemBean.TYPE_DOC_TITLEIMG;
-            } else {
-                bean.itemType = NewsDetail.ItemBean.TYPE_DOC_SLIDEIMG;
-            }
-        }
-    }
-
 
     @Override
     protected void onViewDestroy() {

@@ -1,5 +1,6 @@
 package com.seeme.daniel.seepic.base;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.seeme.daniel.seepic.R;
+import com.seeme.daniel.seepic.utils.DialogUtils;
+import com.seeme.daniel.seepic.view.MultiStateView;
+import com.seeme.daniel.seepic.view.SimpleMultiStateView;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -22,6 +29,12 @@ public abstract class BaseMvpFragment<M extends Model, V extends MyView, P exten
     protected Context mContext;
     protected View mRootView = null;
     Unbinder unbinder;
+
+    protected Dialog mLoadingDialog = null;
+
+    @Nullable
+    @BindView(R.id.SimpleMultiStateView)
+    SimpleMultiStateView mSimpleMultiStateView;
 
     @Override
     public void onAttach(Context context) {
@@ -46,9 +59,36 @@ public abstract class BaseMvpFragment<M extends Model, V extends MyView, P exten
         }
 
         mContext = mRootView.getContext();
+        mLoadingDialog = DialogUtils.getLoadingDialog(mContext);
         return mRootView;
     }
 
+    private void initStateView() {
+        if (mSimpleMultiStateView == null) return;
+        mSimpleMultiStateView.setEmptyResource(R.layout.view_empty)
+                .setRetryResource(R.layout.view_retry)
+                .setLoadingResource(R.layout.view_loading)
+                .setNoNetResource(R.layout.view_nonet)
+                .build()
+                .setonReLoadlistener(new MultiStateView.onReLoadlistener() {
+                    @Override
+                    public void onReload() {
+                        onRetry();
+                    }
+                });
+    }
+
+    private void onRetry() {
+    }
+
+    protected void hideLoadingDialog() {
+        if (mLoadingDialog != null && mLoadingDialog.isShowing()) {
+            mLoadingDialog.dismiss();
+        }
+        if (mSimpleMultiStateView != null) {
+            mSimpleMultiStateView.showContent();
+        }
+    }
 
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
@@ -60,6 +100,7 @@ public abstract class BaseMvpFragment<M extends Model, V extends MyView, P exten
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView(view, savedInstanceState);
+        initStateView();
     }
 
     @Override

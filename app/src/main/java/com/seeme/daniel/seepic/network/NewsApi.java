@@ -1,8 +1,6 @@
 package com.seeme.daniel.seepic.network;
 
-import android.support.v4.media.session.PlaybackStateCompat;
-
-import com.seeme.daniel.seepic.mvp_news.entity.NewsDetail;
+import com.seeme.daniel.seepic.entity.NewsDetail;
 
 import java.util.List;
 

@@ -2,7 +2,7 @@ package com.seeme.daniel.seepic.mvp_news.new_total;
 
 import com.seeme.daniel.seepic.HiApplication;
 import com.seeme.daniel.seepic.R;
-import com.seeme.daniel.seepic.mvp_news.entity.Channel;
+import com.seeme.daniel.seepic.entity.Channel;
 
 import java.util.ArrayList;
 import java.util.Arrays;

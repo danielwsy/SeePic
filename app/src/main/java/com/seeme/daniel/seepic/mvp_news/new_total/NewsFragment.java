@@ -4,16 +4,12 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.flyco.tablayout.SlidingTabLayout;
 import com.seeme.daniel.seepic.R;
 import com.seeme.daniel.seepic.base.BaseMvpFragment;
-import com.seeme.daniel.seepic.base.BasePresenter;
-import com.seeme.daniel.seepic.base.Model;
-import com.seeme.daniel.seepic.base.MyView;
 import com.seeme.daniel.seepic.mvp_news.adapter.NewsAdapter;
-import com.seeme.daniel.seepic.mvp_news.entity.Channel;
+import com.seeme.daniel.seepic.entity.Channel;
 import com.seeme.daniel.seepic.utils.ToastUtils;
 import com.seeme.daniel.seepic.view.CustomViewPager;
 

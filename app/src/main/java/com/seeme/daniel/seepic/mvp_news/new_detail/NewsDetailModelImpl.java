@@ -1,10 +1,8 @@
 package com.seeme.daniel.seepic.mvp_news.new_detail;
 
-import com.seeme.daniel.seepic.entity.PhotoBean;
-import com.seeme.daniel.seepic.mvp_news.entity.NewsDetail;
+import com.seeme.daniel.seepic.entity.NewsDetail;
 import com.seeme.daniel.seepic.network.NewsApi;
 import com.seeme.daniel.seepic.network.NewsHttpUtils;
-import com.seeme.daniel.seepic.network.PhotoApi;
 import com.seeme.daniel.seepic.network.UrlConfig;
 
 import java.util.List;

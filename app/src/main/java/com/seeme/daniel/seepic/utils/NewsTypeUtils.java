@@ -1,7 +1,7 @@
 package com.seeme.daniel.seepic.utils;
 
 
-import com.seeme.daniel.seepic.mvp_news.entity.NewsDetail;
+import com.seeme.daniel.seepic.entity.NewsDetail;
 
 /**
  * @author danielwang

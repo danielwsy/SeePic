@@ -1,4 +1,4 @@
-package com.seeme.daniel.seepic.mvp_news.entity;
+package com.seeme.daniel.seepic.entity;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
@@ -6,8 +6,11 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 新闻实体
+ * @author danielwang
+ * @Description: 新闻实体
+ * @date 2018/11/8 14:52
  */
+
 public class NewsDetail implements Serializable {
 
     @Override
@@ -165,7 +168,7 @@ public class NewsDetail implements Serializable {
          * hasSlide : true
          */
 
-
+        @Override
         public int getItemType() {
             return itemType;
         }

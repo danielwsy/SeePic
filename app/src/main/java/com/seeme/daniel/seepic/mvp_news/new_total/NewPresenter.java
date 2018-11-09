@@ -1,13 +1,13 @@
 package com.seeme.daniel.seepic.mvp_news.new_total;
 
 import com.seeme.daniel.seepic.base.BasePresenter;
-import com.seeme.daniel.seepic.mvp_news.entity.Channel;
+import com.seeme.daniel.seepic.entity.Channel;
 
 import java.util.List;
 
 /**
  * @author danielwang
- * @Description:
+ * @Description: 获取栏目
  * @date 2018/11/8 15:18
  */
 public class NewPresenter extends BasePresenter<NewModel, NewView> {

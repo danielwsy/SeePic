@@ -1,20 +1,25 @@
-package com.seeme.daniel.seepic.mvp_news.entity;
+package com.seeme.daniel.seepic.entity;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+
+import org.litepal.annotation.Column;
+import org.litepal.crud.DataSupport;
 
 import java.io.Serializable;
 
 /**
  * @author danielwang
- * @Description: 栏目实体类
- * @date 2018/10/11 15:28
+ * @Description: 栏目实体
+ * @date 2018/11/8 14:52
  */
-public class Channel implements Serializable {
+public class Channel extends DataSupport implements Serializable, MultiItemEntity {
 
     public static final int TYPE_MY = 1;
     public static final int TYPE_OTHER = 2;
     public static final int TYPE_MY_CHANNEL = 3;
     public static final int TYPE_OTHER_CHANNEL = 4;
 
+    @Column(ignore = true)
     public int itemtype;
 
     private String channelId;
@@ -29,7 +34,7 @@ public class Channel implements Serializable {
      */
     private boolean isChannelSelect;
 
-
+    @Override
     public int getItemType() {
         return itemtype;
     }

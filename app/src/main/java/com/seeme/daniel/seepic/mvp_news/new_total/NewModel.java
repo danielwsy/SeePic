@@ -1,7 +1,7 @@
 package com.seeme.daniel.seepic.mvp_news.new_total;
 
 import com.seeme.daniel.seepic.base.Model;
-import com.seeme.daniel.seepic.mvp_news.entity.Channel;
+import com.seeme.daniel.seepic.entity.Channel;
 
 import java.util.List;
 

@@ -4,14 +4,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.seeme.daniel.seepic.entity.Channel;
 import com.seeme.daniel.seepic.mvp_news.new_detail.NewsDetailFragment;
-import com.seeme.daniel.seepic.mvp_news.entity.Channel;
 
 import java.util.List;
 
 /**
  * @author danielwang
- * @Description:
+ * @Description:  新闻总页面adapter
  * @date 2018/11/8 14:52
  */
 public class NewsAdapter extends FragmentStatePagerAdapter {

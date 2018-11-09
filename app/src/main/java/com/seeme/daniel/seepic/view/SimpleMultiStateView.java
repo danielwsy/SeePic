@@ -99,7 +99,7 @@ public class SimpleMultiStateView extends MultiStateView {
                 public void run() {
                     setViewState(MultiStateView.STATE_FAIL);
                 }
-            }, 100);
+            }, 20);
         }
 
     }
@@ -145,7 +145,7 @@ public class SimpleMultiStateView extends MultiStateView {
             public void run() {
                 setViewState(MultiStateView.STATE_CONTENT);
             }
-        }, 100);
+        }, 20);
     }
 
     @Override
