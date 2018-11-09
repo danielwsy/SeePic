@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.seeme.daniel.seepic">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".HiApplication"
@@ -18,7 +18,11 @@
             android:theme="@style/MainActivity">
 
         </activity>
-        <activity android:name=".PhotoDetailsActivity">
+        <activity android:name=".PhotoDetailsActivity"></activity>
+        <activity
+            android:name=".mvp_news.news_article.ArticleActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MainActivity">
 
         </activity>
         <activity

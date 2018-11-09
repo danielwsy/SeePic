@@ -18,6 +18,14 @@ public class UrlConfig {
 
 
     /**
+     * 具体的新闻详情页面有时候地址不同，要根据uid来动态设置
+     */
+    public static final String sGetNewsArticleCmppApi = "http://api.3g.ifeng.com/";
+
+    public static final String sGetNewsArticleDocCmppApi = "ipadtestdoc";
+
+
+    /**
      * 闪屏页壁纸
      */
     public static final String SPLASH_URL = "http://api.dujin.org/bing/1920.php";

@@ -1,6 +1,7 @@
 package com.seeme.daniel.seepic.mvp_news.new_detail;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +25,7 @@ import com.seeme.daniel.seepic.R;
 import com.seeme.daniel.seepic.base.BaseMvpFragment;
 import com.seeme.daniel.seepic.mvp_news.adapter.NewsDetailAdapter;
 import com.seeme.daniel.seepic.entity.NewsDetail;
+import com.seeme.daniel.seepic.mvp_news.news_article.ArticleActivity;
 import com.seeme.daniel.seepic.network.UrlConfig;
 import com.seeme.daniel.seepic.utils.ContextUtils;
 import com.seeme.daniel.seepic.utils.ImageLoaderUtil;
@@ -274,9 +276,9 @@ public class NewsDetailFragment extends BaseMvpFragment<NewsDetailModel, NewDeta
         switch (itemBean.getItemType()) {
             case NewsDetail.ItemBean.TYPE_DOC_TITLEIMG:
             case NewsDetail.ItemBean.TYPE_DOC_SLIDEIMG:
-//                Intent intent = new Intent(getActivity(), ArticleReadActivity.class);
-//                intent.putExtra("aid", itemBean.getDocumentId());
-//                startActivity(intent);
+                Intent intent = new Intent(getActivity(), ArticleActivity.class);
+                intent.putExtra("uid", itemBean.getDocumentId());
+                startActivity(intent);
                 break;
             case NewsDetail.ItemBean.TYPE_SLIDE:
 //                ImageBrowseActivity.launch(getActivity(), itemBean);
