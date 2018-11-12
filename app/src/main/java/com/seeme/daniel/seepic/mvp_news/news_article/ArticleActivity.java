@@ -37,7 +37,6 @@ import butterknife.OnClick;
  */
 public class ArticleActivity extends BaseMvpActivity<ArticleModel, ArticleView, ArticlePresenter> implements ArticleView {
 
-
     @BindView(R.id.tv_title)
     TextView mTvTitle;
     @BindView(R.id.iv_logo)
@@ -46,8 +45,6 @@ public class ArticleActivity extends BaseMvpActivity<ArticleModel, ArticleView, 
     TextView mTvName;
     @BindView(R.id.tv_updateTime)
     TextView mTvUpdateTime;
-    //    @BindView(R.id.tv_content)
-//    TextView mTvContent;
     @BindView(R.id.webview)
     WebView mWebView;
     @BindView(R.id.iv_back)
@@ -70,6 +67,7 @@ public class ArticleActivity extends BaseMvpActivity<ArticleModel, ArticleView, 
     public void onViewClicked() {
         finish();
     }
+
     @Override
     public ArticleModel createModel() {
         return new ArticleModelImpl();
@@ -105,7 +103,6 @@ public class ArticleActivity extends BaseMvpActivity<ArticleModel, ArticleView, 
     }
 
     private void setWebViewSetting() {
-        addjs(mWebView);
         mWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.getSettings().setAppCacheEnabled(true);
@@ -131,25 +128,6 @@ public class ArticleActivity extends BaseMvpActivity<ArticleModel, ArticleView, 
                 presenter.getNewsArticle(aid);
             }
         });
-    }
-
-
-    private void addjs(final WebView webview) {
-
-        class JsObject {
-            @JavascriptInterface
-            public void jsFunctionimg(final String i) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                    }
-                });
-
-            }
-
-        }
-        webview.addJavascriptInterface(new JsObject(), "jscontrolimg");
-
     }
 
     @Override

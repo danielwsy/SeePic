@@ -2,11 +2,13 @@ package com.seeme.daniel.seepic;
 
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.seeme.daniel.seepic.base.BaseMvpActivity;
 import com.seeme.daniel.seepic.base.SupportFragment;
@@ -15,9 +17,10 @@ import com.seeme.daniel.seepic.photo_mvp.PhotoFragment;
 import com.seeme.daniel.seepic.photo_mvp.model.PhotoModel;
 import com.seeme.daniel.seepic.photo_mvp.presenter.PhotoPresenter;
 import com.seeme.daniel.seepic.photo_mvp.view.PhotoMyView;
-import com.seeme.daniel.seepic.ui.VideoFragment;
+import com.seeme.daniel.seepic.video_mvp.VideoFragment;
 
 import butterknife.BindView;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
 
 public class MainActivity extends BaseMvpActivity<PhotoModel, PhotoMyView, PhotoPresenter> {
@@ -49,6 +52,8 @@ public class MainActivity extends BaseMvpActivity<PhotoModel, PhotoMyView, Photo
     @BindView(R.id.contentContainer)
     FrameLayout mContentContainer;
     private SupportFragment[] mFragments = new SupportFragment[4];
+
+    private long mExitTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +126,34 @@ public class MainActivity extends BaseMvpActivity<PhotoModel, PhotoMyView, Photo
         });
     }
 
+    @Override
+    public void onBackPressedSupport() {
+        if (JCVideoPlayer.backPress()) {
+            return;
+        }
+        super.onBackPressedSupport();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JCVideoPlayer.releaseAllVideos();
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if ((System.currentTimeMillis() - mExitTime) > 2000) {
+                Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                mExitTime = System.currentTimeMillis();
+            } else {
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
 }
 
