@@ -18,9 +18,9 @@
             android:theme="@style/MainActivity">
 
         </activity>
-        <activity android:name=".PhotoDetailsActivity"></activity>
+        <activity android:name=".ui.photo_mvp.PhotoDetailsActivity"></activity>
         <activity
-            android:name=".mvp_news.news_article.ArticleActivity"
+            android:name=".ui.news_mvp.news_article.ArticleActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MainActivity">
 
@@ -37,6 +37,7 @@
             </intent-filter>
 
         </activity>
+        <activity android:name=".ui.music_mvp.PlayMusicActivity" />
     </application>
 
 </manifest>

@@ -18,6 +18,11 @@ public class UrlConfig {
 
 
     /**
+     * 音乐地址
+     */
+    public static final String MUSIC_BASEURL = "https://netease.api.zzsun.cc/";
+
+    /**
      * 具体的新闻详情页面有时候地址不同，要根据uid来动态设置
      */
     public static final String sGetNewsArticleCmppApi = "http://api.3g.ifeng.com/";

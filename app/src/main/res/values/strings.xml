@@ -8,9 +8,25 @@
     <string name="news_toast">已为您推荐了%1$s条新资讯</string>
     <string name="finish">完成</string>
     <string name="edit">编辑</string>
-    <string name="willUrl">http://will-ls.top/</string>
-    <string name="githubUrl">https://github.com/Will-Ls</string>
-    <string name="email">liwanglin_001@163.com</string>
+
+
+
+    <string name="error_connection">网络连接异常，请稍后重试！</string>
+    <string name="error_search">搜索失败，请稍后重试</string>
+    <string name="secret_num">~~ 动态 %1$d ~~</string>
+    <string name="error_playing_track">播放出错</string>
+    <string name="folders">文件夹</string>
+    <string name="play_time">--:--</string>
+    <string name="play_no_resource">无音乐</string>
+    <string name="play_mode">%1$s("%2$d")</string>
+    <string name="play_mode_random">随机播放</string>
+    <string name="play_mode_repeat">单曲播放</string>
+    <string name="play_mode_loop">顺序播放</string>
+    <string name="search_lyric">在线搜词</string>
+    <string name="artist_tips">歌手 - 专辑</string>
+    <string name="song_operate">歌曲操作</string>
+    <string name="love">收藏</string>
+    <string name="equalizer">均衡器</string>
 
     <string-array name="news_channel">
         <item>头条</item>

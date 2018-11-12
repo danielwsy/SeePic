@@ -12,12 +12,13 @@ import android.widget.Toast;
 
 import com.seeme.daniel.seepic.base.BaseMvpActivity;
 import com.seeme.daniel.seepic.base.SupportFragment;
-import com.seeme.daniel.seepic.mvp_news.new_total.NewsFragment;
-import com.seeme.daniel.seepic.photo_mvp.PhotoFragment;
-import com.seeme.daniel.seepic.photo_mvp.model.PhotoModel;
-import com.seeme.daniel.seepic.photo_mvp.presenter.PhotoPresenter;
-import com.seeme.daniel.seepic.photo_mvp.view.PhotoMyView;
-import com.seeme.daniel.seepic.video_mvp.VideoFragment;
+import com.seeme.daniel.seepic.ui.music_mvp.MusicFragment;
+import com.seeme.daniel.seepic.ui.news_mvp.new_total.NewsFragment;
+import com.seeme.daniel.seepic.ui.photo_mvp.PhotoFragment;
+import com.seeme.daniel.seepic.ui.photo_mvp.model.PhotoModel;
+import com.seeme.daniel.seepic.ui.photo_mvp.presenter.PhotoPresenter;
+import com.seeme.daniel.seepic.ui.photo_mvp.view.PhotoMyView;
+import com.seeme.daniel.seepic.ui.video_mvp.VideoFragment;
 
 import butterknife.BindView;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
@@ -87,7 +88,7 @@ public class MainActivity extends BaseMvpActivity<PhotoModel, PhotoMyView, Photo
             mFragments[0] = NewsFragment.newInstance();
             mFragments[1] = VideoFragment.newInstance();
             mFragments[2] = PhotoFragment.newInstance();
-            mFragments[3] = VideoFragment.newInstance();
+            mFragments[3] = MusicFragment.newInstance();
             getSupportDelegate().loadMultipleRootFragment(R.id.contentContainer, 0,
                     mFragments[0],
                     mFragments[1],
@@ -96,8 +97,8 @@ public class MainActivity extends BaseMvpActivity<PhotoModel, PhotoMyView, Photo
         } else {
             mFragments[0] = findFragment(NewsFragment.class);
             mFragments[1] = findFragment(VideoFragment.class);
-            mFragments[2] = findFragment(NewsFragment.class);
-            mFragments[3] = findFragment(VideoFragment.class);
+            mFragments[2] = findFragment(PhotoFragment.class);
+            mFragments[3] = findFragment(MusicFragment.class);
         }
     }
 

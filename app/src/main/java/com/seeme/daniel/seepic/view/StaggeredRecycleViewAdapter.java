@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.seeme.daniel.seepic.PhotoDetailsActivity;
+import com.seeme.daniel.seepic.ui.photo_mvp.PhotoDetailsActivity;
 import com.seeme.daniel.seepic.R;
 import com.seeme.daniel.seepic.entity.PhotoBean;
 
