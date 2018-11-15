@@ -1,6 +1,7 @@
 package com.seeme.daniel.seepic.ui.music_mvp;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -28,7 +29,7 @@ public class MusicFragment extends BaseMvpFragment {
     @BindView(R.id.viewpager)
     CustomViewPager mViewpager;
     @BindView(R.id.SlidingTabLayout)
-    SlidingTabLayout SlidingTabLayout;
+    TabLayout SlidingTabLayout;
     MusicAdapter adapter;
 
     public static MusicFragment newInstance() {
@@ -64,7 +65,7 @@ public class MusicFragment extends BaseMvpFragment {
         adapter = new MusicAdapter(getChildFragmentManager(), "我的", "排行榜");
         mViewpager.setAdapter(adapter);
         mViewpager.setCurrentItem(0);
-        SlidingTabLayout.setViewPager(mViewpager);
+        SlidingTabLayout.setupWithViewPager(mViewpager);
     }
 
     @Override

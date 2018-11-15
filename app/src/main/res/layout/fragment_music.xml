@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/rl_top"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="40dp"
+        android:background="@color/top">
 
-        <com.flyco.tablayout.SlidingTabLayout xmlns:tl="http://schemas.android.com/apk/res-auto"
-            android:layout_centerInParent="true"
-            android:foregroundGravity="center"
+        <android.support.design.widget.TabLayout
             android:id="@+id/SlidingTabLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_toLeftOf="@+id/iv_edit"
+            android:layout_height="45dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:background="@color/top"
-            tl:tl_indicator_gravity="BOTTOM"
-            tl:tl_indicator_style="NORMAL"
-            tl:tl_indicator_color="@color/white"
-            tl:tl_textSelectColor="@color/white"
-            tl:tl_textsize="14sp" />
+            app:tabIndicatorColor="@color/white"
+            app:tabSelectedTextColor="@color/white"
+            app:tabTextAppearance="@style/tab_appearance"
+            app:tabTextColor="@color/translucent_white">
+
+        </android.support.design.widget.TabLayout>
 
     </RelativeLayout>
 
@@ -28,6 +31,61 @@
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/rl_bottom"
+        android:layout_below="@+id/rl_top"
         android:background="@color/white" />
 
-</LinearLayout>
+    <RelativeLayout
+        android:id="@+id/rl_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/translucent_white"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/music_pic"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dp_4"
+            android:background="@drawable/ic_logo"
+            android:scaleType="center" />
+
+        <TextView
+            android:id="@+id/music_info"
+            android:layout_width="match_parent"
+            android:layout_height="21dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="99dp"
+            android:layout_toRightOf="@+id/music_pic"
+            android:ellipsize="end"
+            android:gravity="left|center_vertical"
+            android:singleLine="true"
+            android:text="The multiplier and unit of selec"
+            android:textColor="@color/music_not_name"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/music_playOrStop"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="51dp"
+            android:src="@drawable/ic_music_not_stop" />
+
+        <ImageView
+            android:id="@+id/music_nextOrClose"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_music_not_next" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

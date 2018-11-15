@@ -19,4 +19,12 @@
         <item name="android:windowEnterAnimation">@anim/dialog_bottom_slide_in</item>
         <item name="android:windowExitAnimation">@anim/dialog_bottom_slide_out</item>
     </style>
+
+    <!--音乐条目属性-->
+    <declare-styleable name="LocalItemView">
+        <attr name="tv_name" format="reference|string" />
+        <attr name="iv_icon" format="reference|integer" />
+        <attr name="tv_desc" format="reference|string" />
+        <attr name="iv_icon_color" format="reference|color" />
+    </declare-styleable>
 </resources>
