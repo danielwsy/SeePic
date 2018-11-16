@@ -2,6 +2,7 @@ package com.seeme.daniel.seepic.splash;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -139,6 +140,17 @@ public class SplashActivity extends BaseMvpActivity {
             }
         }));
 
+    }
+
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            System.out.println("返回键执行了！！！");
+        }
+        return true;
     }
 
     public Observable<Integer> countDown(int time) {
